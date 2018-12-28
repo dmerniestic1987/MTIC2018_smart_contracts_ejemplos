@@ -51,6 +51,25 @@ Para deploy en localhost configurar Ganache para que escuche en el puerto 8545
 ```
 truffle migrate 
 ```
+### TRON
+Tronbox es un framework que permite desarrollar dApps, aplicaciones descentralizadas, utilizando
+la blockchain TROM. 
+Requerimientos
+* [Nodejs](https://nodejs.org/) - Javascript del lado del servidor y npm para gestión de dependencias.
+* [Tronbox](https://developers.tron.network/docs/tron-box-contract-deployment) - Framework para desarrollo de Dapps, aplicaciones descentralizadas.
 
+```
+npm install tronbox
+```
+Una vez instalado ingresar al directorio tron
+Para compilar:
+```
+tronbox compile
+```
+
+Para deploy en localhost configurar Ganache para que escuche en el puerto 8545
+```
+tronbox migrate 
+```
 ## Licencia
 Este proyecto opera bajo la licencia MIT.
