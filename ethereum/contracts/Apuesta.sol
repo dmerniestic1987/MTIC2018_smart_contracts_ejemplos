@@ -15,7 +15,7 @@ contract Apuesta{
         idEvento = eventoId;
         estado = Estado.Creada;
         totalApostado = 0;
-    }
+    } 
     
     modifier enEstado(Estado _Estado) {
         require(estado == _Estado, "No es el estado correcto");
