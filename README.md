@@ -1,5 +1,7 @@
 # Smart Contracts - Ejemplos - MTIC 2018
-Ejemplos de diferentes tipos de smart contracts para blockchains públicas. Para Maestría TIC cohorte 2018-2020 de la universidad UADE.
+Ejemplos de diferentes tipos de smart contracts para blockchains públicas. 
+Trabajo final - Maestría TIC cohorte 2018-2020 de la universidad UADE.
+Diego Alejandro Mernies
 
 ## Objetivos
 * Aprender los diferentes lenguajes de programación que se pueden utilizar para desarrollar smart contracts.
