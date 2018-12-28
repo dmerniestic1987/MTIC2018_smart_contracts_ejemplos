@@ -5,8 +5,17 @@ Diego Alejandro Mernies
 
 ## Objetivos
 * Aprender los diferentes lenguajes de programación que se pueden utilizar para desarrollar smart contracts.
-* Evaluar técnicamente la tecnología blockchain más apropiada para desarrollar Betex
-* Documnetar el proceso de selección de la tecnología.
+* Evaluar técnicamente la tecnología blockchain más apropiada para desarrollar Betex.
+* Documentar el proceso de selección de la tecnología.
+* Contar con trazabilidad.
+
+## Organización
+Se organizará el proyecto con 3 branches. Desarrollaremos el código en la rama develop. Cuando llegamos a una versión lista para publicar en las redes públicas de prueba hacemos el merge para release-candidate. Una vez publicado y probados los smart contracts se pasa a master.
+
+* master: La última versión estable del código fuente.
+* develop: Código fuente en desarrollo.
+* release-candidate: Versiones estables para publicar los smart contract en redes públicas.
+
 
 ## Blockchain utilizadas
 
