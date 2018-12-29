@@ -4,11 +4,14 @@
   "description": "Ejemplo de proyecto con Node desde 0",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "author": "Diego Alejandro Mernies",
   "license": "MIT",
   "dependencies": {
-    "solc": "^0.4.25"
+    "ganache-cli": "^6.2.5",
+    "mocha": "^5.2.0",
+    "solc": "^0.4.25",
+    "web3": "^1.0.0-beta.37"
   }
 }
