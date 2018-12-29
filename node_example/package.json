@@ -1,0 +1,14 @@
+{
+  "name": "node_example",
+  "version": "1.0.0",
+  "description": "Ejemplo de proyecto con Node desde 0",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Diego Alejandro Mernies",
+  "license": "MIT",
+  "dependencies": {
+    "solc": "^0.4.25"
+  }
+}
