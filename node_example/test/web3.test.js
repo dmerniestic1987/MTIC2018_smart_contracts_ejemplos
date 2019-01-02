@@ -1,12 +1,5 @@
 /*
-Ejemplo de creación de test unitarios de smart contracts con Mocha. 
-Los pasos son: 
-1. Deploy del contrato. 
-2. Manipulación del contrato. 
-3. Hacer el assert
-Ejemplo tomado de: 
-    Ethereum and Solidity: The Complete Developer's Guide de  Stephen Grider
-    https://www.udemy.com/ethereum-and-solidity-the-complete-developers-guide/
+Test unitario para interactuar con web3
 */
 const assert = require('assert');
 const ganache = require('ganache-cli');
@@ -33,5 +26,20 @@ describe('Web3 - Cuentas y saldos', () => {
                 assert.equal(balance > 0, true);        
             });    
         });
+    });
+
+    it('Transferencias entre cuentas', () => {
+        web3.eth.sendTransaction({
+            from: fetchedAccounts[0],
+            to: fetchedAccounts[1],
+            value: '500000'
+        })
+        .then(receipt => {
+            console.log(receipt);
+            web3.eth.getBalance(fetchedAccounts[1]).then(balance => {
+                console.log(fetchedAccounts[1] + ": "  + balance + " wei");
+                assert.equal(fetchedAccounts[1] > 0, true);        
+            });  
+        });                
     });
 });
