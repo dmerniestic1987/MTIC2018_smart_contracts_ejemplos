@@ -18,6 +18,7 @@ const {interface, bytecode} = require('../compile');
 
 let fetchedAccounts;
 let inbox; 
+let inboxDeployed;
 before(async () => {
     //Devuelve una promesa que se resuelve con una lista. 
     //Tenemos que resolver la asincronía con la palabra "then" y con el "catch"
@@ -31,6 +32,9 @@ before(async () => {
               , gas: '1000000'});
     
     inbox.setProvider(ganache.provider());
+
+    inboxDeployed = await new web3.eth.Contract(JSON.parse(interface)
+    , inbox.options.address);
 });
 
 describe('Inbox Example Test', () => {
@@ -39,29 +43,41 @@ describe('Inbox Example Test', () => {
         console.log(inbox);    
     });
 
-    it('Probando getMessage', async () => {
-        //Creamos una nueva instancia de un contrato con la dirección de inbox.
-        //Estamos usando un contrato existente
-        let inboxDeployed = await new web3.eth.Contract(JSON.parse(interface)
-                                                    , inbox.options.address);
-        
+    it('Probando message', async () => {       
         //Devuelve una promesa y tenemos que esperar a que la promesa se resuelva
         const message = await inboxDeployed.methods.message().call();
         console.log(message);
         assert.equal(message, 'Hola');
-    })
+    });
+
+    it ('Probando getMessage()', async () => {
+        const message = await inboxDeployed.methods.getMessage().call();
+        console.log(message);
+        assert.equal(message, 'Hola');
+    });
 
     it('Probando setMessage', async() => {
-        //Creamos una nueva instancia de un contrato con la dirección de inbox.
-        //Estamos usando un contrato existente
-        let inboxDeployed = await new web3.eth.Contract(JSON.parse(interface)
-                                                    , inbox.options.address);
-
-        await inboxDeployed.methods.setMessage('Nuevo Mensaje').send({from: fetchedAccounts[1]});                                            
+        await inboxDeployed.methods.setMessage('Nuevo Mensaje')
+                                   .send({from: fetchedAccounts[1]});                                            
         //Devuelve una promesa y tenemos que esperar a que la promesa se resuelva
         const message = await inboxDeployed.methods.message().call();
         console.log(message);
         assert.equal(message, 'Nuevo Mensaje');
 
+    });
+
+    it ('Estimar gas', async() => {
+        let isTestOk = false;
+        try{
+            let gasAmount = await inboxDeployed.methods.setMessage('Nuevo Mensaje')
+                                  .estimateGas({gas: 100000});
+            isTestOk = true;
+            console.log(gasAmount);
+        }
+        catch(err){
+            console.log(err);
+        }
+
+        assert.equal(isTestOk, true);
     });
 });
