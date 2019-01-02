@@ -48,4 +48,16 @@ describe('Prueba de apuestas', () =>{
         console.log(message);
         assert.equal(message, 5000000);
     });
+
+    it ('Aceptar Apuesta', async() => {
+        await apuestaDeployed.methods.aceptarApuesta().send({
+            from: fetchedAccounts[2],
+            value: 5000000,
+            gas: 1000000
+        });
+
+        const message = await apuestaDeployed.methods.getValorPostado().call();
+        console.log(message);
+        assert.equal(message, 5000000);
+    });    
 });
