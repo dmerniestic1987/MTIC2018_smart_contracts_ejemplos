@@ -14,7 +14,7 @@ before(async () => {
     fetchedAccounts = await web3.eth.getAccounts();
 });
 
-describe('Web3 - Cuentas y saldos', () => {
+describe('Web3 - Cuentas y saldos - Test', () => {
     it('Observamos las cuentas', () =>{
         console.log(fetchedAccounts);    
         assert.equal(fetchedAccounts.length > 0, true);

@@ -25,12 +25,43 @@ before(async () => {
     fetchedAccounts = await web3.eth.getAccounts();
 
     inbox = await new web3.eth.Contract(JSON.parse(interface))
-        .deploy({ data: bytecode, arguments: ['Mensaje inicial de Inbox (constructor)']})
-        .send({from: fetchedAccounts[0], gas: '1000000'});
+        .deploy({ data: bytecode
+                , arguments: ['Hola']})
+        .send({ from: fetchedAccounts[0]
+              , gas: '1000000'});
+    
+    inbox.setProvider(ganache.provider());
 });
 
-describe('Inbox', () => {
+describe('Inbox Example Test', () => {
     it('Deploy del contrato', () =>{
+        assert.ok(inbox.options.address);
         console.log(inbox);    
+    });
+
+    it('Probando getMessage', async () => {
+        //Creamos una nueva instancia de un contrato con la dirección de inbox.
+        //Estamos usando un contrato existente
+        let inboxDeployed = await new web3.eth.Contract(JSON.parse(interface)
+                                                    , inbox.options.address);
+        
+        //Devuelve una promesa y tenemos que esperar a que la promesa se resuelva
+        const message = await inboxDeployed.methods.message().call();
+        console.log(message);
+        assert.equal(message, 'Hola');
+    })
+
+    it('Probando setMessage', async() => {
+        //Creamos una nueva instancia de un contrato con la dirección de inbox.
+        //Estamos usando un contrato existente
+        let inboxDeployed = await new web3.eth.Contract(JSON.parse(interface)
+                                                    , inbox.options.address);
+
+        await inboxDeployed.methods.setMessage('Nuevo Mensaje').send({from: fetchedAccounts[1]});                                            
+        //Devuelve una promesa y tenemos que esperar a que la promesa se resuelva
+        const message = await inboxDeployed.methods.message().call();
+        console.log(message);
+        assert.equal(message, 'Nuevo Mensaje');
+
     });
 });

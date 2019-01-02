@@ -30,7 +30,7 @@ beforeEach(() => {
     car = new Car();
 });
 
-describe('Test de Car', () => {
+describe('Car Test', () => {
     it('Puede estancionar', () => {
         assert.equal(car.estacionar(), 'parado');    
     });
