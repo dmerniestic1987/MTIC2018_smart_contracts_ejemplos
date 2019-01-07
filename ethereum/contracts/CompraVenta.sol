@@ -68,6 +68,7 @@ contract CompraVenta{
         else if ( compradorOk && 
                   !vendedorOk && 
                   now >= inicioContrato + 30 days ){
+            comprador.transfer(address(this).balance);
             selfdestruct(comprador);
         }
 
@@ -80,8 +81,9 @@ contract CompraVenta{
         if (msg.sender == comprador)
             compradorOk = false;
 
-        if (compradorOk && vendedorOk)
+        if (!compradorOk && !vendedorOk){
             selfdestruct(comprador);
+        }
     }
 
     /**

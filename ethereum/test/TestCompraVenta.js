@@ -67,5 +67,31 @@ describe('Test de Contrato CompraVenta', () => {
         assert.equal(balanceFinalVendedor > balanceInicialVendedor, true, 'El balance final del vendedor debe aumentar');
 
       });      
+
+      it('Test Cancelar Comprador', async () => {
+        const balanceInicial = await web3.eth.getBalance(comprador);
+        console.log('Balance Inicial Cancelar 01: ' + balanceInicial);
+        
+        const deposito = web3.utils.toWei('2', 'ether');
+        await ec.depositar({from:comprador,value:deposito});
+        await ec.aceptar({from:comprador});
+
+        const compradorOkBefore= await ec.compradorOk();
+        console.log('Antes de Aceptar - comprador OK: ' + compradorOkBefore);
+        assert.equal(compradorOkBefore, true, 'Dabe aceptar el comprador');
+
+        
+        await ec.cancelar({from:comprador});
+        await ec.cancelar({from:vendedor});
+        const compradorOkAfter = await ec.compradorOk();
+        const vendedorOkAfter = await ec.vendedorOk();
+        console.log('Después de Cancelar - comprador OK: ' + compradorOkAfter);
+        assert.equal(compradorOkAfter, false, 'El comprador debió rechazar');
+        assert.equal(vendedorOkAfter, false, 'El vendedor debió rechazar');
+
+        const balanceFinal= await web3.eth.getBalance(comprador);
+        console.log('Balance Final Aceptar 01: ' + balanceFinal);
+
+      });       
   })
 })
