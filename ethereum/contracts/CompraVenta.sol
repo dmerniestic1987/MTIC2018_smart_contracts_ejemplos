@@ -43,14 +43,6 @@ contract CompraVenta{
         _;       
     }
     
-    function setComprador() public{
-        comprador = msg.sender;
-    }
-
-    function setVendedor() public{
-        vendedor = msg.sender;
-    }
-
     /**
     * Sólo el comprador puede realizar depositos como parte del pago total.
     */
