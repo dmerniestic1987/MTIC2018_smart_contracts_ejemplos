@@ -10,9 +10,9 @@ contract Apuesta{
     uint256 public  idEvento;
     Estado  public  estado;
     
-    constructor(uint256 eventoId) public{
+    constructor() public{
         owner = msg.sender;
-        idEvento = eventoId;
+        idEvento = 0;
         estado = Estado.Creada;
         totalApostado = 0;
     } 
@@ -35,6 +35,12 @@ contract Apuesta{
     modifier mismoValorApostado(){
         require(msg.value == valorApostado, "Ingrese el mismo valor");
         _;        
+    }
+
+    function setEventId(uint256 eventoId) enEstado(Estado.Creada) public{
+        if (idEvento == 0){
+            idEvento = eventoId;
+        }
     }
     
     function abrirApuesta() enEstado(Estado.Creada) valorPositivo() public payable{
