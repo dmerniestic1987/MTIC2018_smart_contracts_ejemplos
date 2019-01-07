@@ -17,7 +17,7 @@ contract CompraVenta{
     constructor(address address_comprador, address address_vendedor) public{
         balance = 0;
         inicioContrato = block.timestamp;
-        escrow = msg.sender;
+        escrow = tx.origin;
         compradorOk = false;
         vendedorOk = false;
 
@@ -68,8 +68,8 @@ contract CompraVenta{
         else if ( compradorOk && 
                   !vendedorOk && 
                   now >= inicioContrato + 30 days ){
-            comprador.transfer(address(this).balance);
-            selfdestruct(comprador);
+            comprador.transfer(balance);
+            selfdestruct(escrow);
         }
 
     }
@@ -82,7 +82,9 @@ contract CompraVenta{
             compradorOk = false;
 
         if (!compradorOk && !vendedorOk){
-            selfdestruct(comprador);
+            comprador.transfer(balance);
+            balance=0;
+            selfdestruct(escrow);
         }
     }
 
@@ -101,6 +103,8 @@ contract CompraVenta{
     }
 
     function abortarOperacion() public soloEscrow(){
-        selfdestruct(comprador);
+        comprador.transfer(balance);
+        balance=0;
+        selfdestruct(escrow);
     }
 }

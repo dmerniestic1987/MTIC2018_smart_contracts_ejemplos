@@ -82,7 +82,6 @@ describe('Test de Contrato CompraVenta', () => {
 
         
         await ec.cancelar({from:comprador});
-        await ec.cancelar({from:vendedor});
         const compradorOkAfter = await ec.compradorOk();
         const vendedorOkAfter = await ec.vendedorOk();
         console.log('Después de Cancelar - comprador OK: ' + compradorOkAfter);
