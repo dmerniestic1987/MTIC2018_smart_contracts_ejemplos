@@ -1,5 +1,5 @@
-var ZombieFactory = artifacts.require("./ZombieFactory.sol");
+var ZombiFactory = artifacts.require("./ZombiFactory.sol");
 
 module.exports = function(deployer, network, accounts) {
-  deployer.deploy(ZombieFactory);
+  deployer.deploy(ZombiFactory);
 };

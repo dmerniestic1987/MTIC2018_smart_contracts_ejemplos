@@ -5,7 +5,7 @@ cuando ocurrió algún evento en la Blockchain
 */
 pragma solidity ^0.5.0;
 
-contract ZombieFactory {
+contract ZombiFactory {
 
     event NewZombie(uint zombieId, string name, uint dna);
 
