@@ -3,6 +3,7 @@ pragma solidity 0.5.0;
 contract Loteria{
     address payable public administrador;
     address payable[]  private jugadores;
+    address payable ultimoGanador;
 
     constructor() public{
         administrador = msg.sender;
@@ -10,6 +11,7 @@ contract Loteria{
     function getBalance() public view returns(uint){
         return address(this).balance;
     }
+
     function random() private  view returns(uint){
         return uint(keccak256(abi.encodePacked(block.difficulty,now, jugadores)));
     }
@@ -28,12 +30,16 @@ contract Loteria{
         _;
     }
     
-    function elegirGanador() public soloAdministrador() returns (address){
+    function elegirGanador() public soloAdministrador(){
         require (jugadores.length > 0, 'No hubieron jugadores');
         address payable ganador = jugadores[random() % jugadores.length];
         administrador.transfer(address(this).balance / 20);
         ganador.transfer(address(this).balance);
-        jugadores = new address payable[](0);
-        return ganador;                
+        jugadores = new address payable[](0);        
+        ultimoGanador = ganador;  
+    }
+
+    function getUltimoGanador() public view returns (address){
+        return ultimoGanador;
     }
 }
