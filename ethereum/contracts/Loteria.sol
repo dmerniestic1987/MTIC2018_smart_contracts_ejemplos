@@ -7,7 +7,9 @@ contract Loteria{
     constructor() public{
         administrador = msg.sender;
     }
-
+    function getBalance() public view returns(uint){
+        return address(this).balance;
+    }
     function random() private  view returns(uint){
         return uint(keccak256(abi.encodePacked(block.difficulty,now, jugadores)));
     }
