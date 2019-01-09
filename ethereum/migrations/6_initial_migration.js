@@ -1,5 +1,5 @@
 var ZombieHelper = artifacts.require("./ZombieHelper.sol");
 
-module.exports = function(deployer, network, accounts) {
+module.exports = function(deployer) {
   deployer.deploy(ZombieHelper);
 };

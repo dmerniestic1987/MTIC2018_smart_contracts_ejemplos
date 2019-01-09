@@ -14,20 +14,13 @@ contract CompraVenta{
     bool    public  compradorOk;
     bool    public  vendedorOk;
 
-    constructor(address address_comprador, address address_vendedor) public{
+    constructor() public{
         balance = 0;
         inicioContrato = block.timestamp;
         escrow = tx.origin;
         compradorOk = false;
         vendedorOk = false;
-
-        //Conversión ya que es payable
-        uint160 intComprador = uint160(address_comprador);
-        uint160 intVendedor = uint160(address_vendedor);
-        comprador = address(intComprador);
-        vendedor = address(intVendedor);
     }
-
     modifier soloComprador() {
         require(msg.sender == comprador, "Usted no es el comprador");
         _;
@@ -43,6 +36,16 @@ contract CompraVenta{
         _;       
     }
     
+    function setVendedor() external{
+        require(msg.sender != comprador, "Vendedor debe ser diferente a comprador");
+        vendedor = msg.sender;
+    }
+
+    function setComprador() external {
+        require(msg.sender != vendedor, "Comprador debe ser diferente a vendedor");
+        comprador = msg.sender;
+    }
+
     /**
     * Sólo el comprador puede realizar depositos como parte del pago total.
     */
@@ -60,10 +63,10 @@ contract CompraVenta{
         if (msg.sender == vendedor)
             vendedorOk = true;
         
-        if (msg.sender == comprador)
+        else if (msg.sender == comprador)
             compradorOk = true;
 
-        if (compradorOk && vendedorOk)
+        else if (compradorOk && vendedorOk)
             pagarBalance();
         else if ( compradorOk && 
                   !vendedorOk && 
