@@ -1,5 +1,5 @@
-var VentaEther = artifacts.require("./VentaEther.sol");
+var Loteria = artifacts.require("./Loteria.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(VentaEther);
+  deployer.deploy(Loteria);
 };
