@@ -12,10 +12,20 @@ contract ZombiFactory is Ownable{
 
     uint dnaDigits = 16;
     uint dnaModulus = 10 ** dnaDigits;
-
+    uint cooldownTime = 1 days;
+    /*
+    Cuando trabajmos con structs es posible optimizar el espacio 
+    en memoria si utilizamos uint32 en vez de uint256. Fuera de 
+    las structs esto no pasa. 
+    También se puede optimizar más espacio se ponemos todos los mismos
+    tipos de manera consecutiva en vez de intercalada. 
+    readyTime permitirá guardar un timestamp.
+    */
     struct Zombie {
         string name;
         uint dna;
+        uint32 level;
+        uint32 readyTime;
     }
 
     Zombie[] public zombies;
@@ -24,7 +34,7 @@ contract ZombiFactory is Ownable{
     mapping(address => uint) ownerZombieCount;
 
     function _createZombie(string memory _name, uint _dna) internal {
-        uint id = zombies.push(Zombie(_name, _dna)) - 1;
+        uint id = zombies.push(Zombie(_name, _dna, 1, uint32(cooldownTime + cooldownTime))) - 1;
         //Guardamos el ID del zombi para saber quién es el dueño
         zombieToOwner[id] = msg.sender;
 
