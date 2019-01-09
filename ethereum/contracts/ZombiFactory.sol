@@ -5,7 +5,8 @@ cuando ocurrió algún evento en la Blockchain
 */
 pragma solidity ^0.5.0;
 
-contract ZombiFactory {
+import "./Ownable.sol";
+contract ZombiFactory is Ownable{
 
     event NewZombie(uint zombieId, string name, uint dna);
 
@@ -46,4 +47,16 @@ contract ZombiFactory {
         _createZombie(_name, randDna);
     }
 
+    /**
+     * Devuelve la información del desarrollador. Es una función del tipo 
+     * pure que no consulta datos ni modifica el contrato
+     */
+    function developerInfo() public pure returns (string memory, string memory, string memory, uint){
+        string memory name = "Diego Alejandro Mernies";
+        string memory gitHubUrl = "https://github.com/dmerniestic1987";
+        string memory linkedinUrl = "https://www.linkedin.com/in/diego-alejandro-mernies-1ab18027/";
+        uint   id = uint (keccak256((abi.encodePacked("Megaman 5"))));
+
+        return (name, gitHubUrl, linkedinUrl, id); 
+    }
 }

@@ -19,5 +19,19 @@ describe('Test de Contrato ZombiFactory', () => {
         console.log('TRX: ', trx);
         assert.ok(trx, 'Transacción no definida');
       });  
+
+      it('Developer Info', async () => {
+        let infoDeveloper = await contratoZombiFactory.developerInfo();      
+        console.log('Info Developer: ', infoDeveloper);
+        assert.ok(infoDeveloper, 'No hay información para mostrar');
+        const NOMBRE = "0";
+        const URL_GITHUB = "1";
+        const URL_LINKEDIN = "2";
+        const ID = "3";
+        console.log('Nombre  : ' + infoDeveloper[NOMBRE]);
+        console.log('GitHub  : ' + infoDeveloper[URL_GITHUB]);
+        console.log('Linkedin: ' + infoDeveloper[URL_LINKEDIN]);
+        console.log('Id      : ' + infoDeveloper[ID]);
+      });  
      });
   });
