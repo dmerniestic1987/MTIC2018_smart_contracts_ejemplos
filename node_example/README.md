@@ -13,8 +13,6 @@ test unitarios escritos en javascript con Mocha.
 El proyecto tiene 2 directorios: 
 * contracts: Donde están los smart contracts en solidity.
 * test: Donde están los test unitarios escritos en javascript.
-* release-candidate: Versiones estables para publicar los smart contract en redes públicas.
-
 
 ## Blockchain utilizadas
 * Ethereum - Testnet Rinkeby
@@ -36,7 +34,7 @@ node compile.js
 node compileApuesta.js
 ```
 
-Para compilar:
+Para realizar Deploy:
 ```
 node deploy.js
 ```
